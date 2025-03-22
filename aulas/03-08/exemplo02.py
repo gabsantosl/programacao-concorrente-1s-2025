@@ -33,7 +33,7 @@ T = threading.Thread(target = Tarefa)
 
 # Iniciando a Thread
 T.start()
-# T.join() --> linha de código ignorada
+# T.join() # --> linha de código ignorada
 
 print("Thread principal finalizada")
 
