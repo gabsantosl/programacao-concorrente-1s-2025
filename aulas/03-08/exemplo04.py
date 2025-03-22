@@ -18,8 +18,9 @@ TB = threading.Thread(target = Saudacao, args = ("Lu", 2))
 t0 = time.time()
 
 '''
-# Lembrar que os comando .start() e .join() são FUNÇÕES, logo, necessitam terminar com ()
-# Todas as funções serão executadas simultâneamente
+Lembrar que os comando .start() e .join() são FUNÇÕES, logo, necessitam terminar com ()
+
+Todas as funções serão executadas simultâneamente
 TA.start()
 TB.start()
 TA.join()
