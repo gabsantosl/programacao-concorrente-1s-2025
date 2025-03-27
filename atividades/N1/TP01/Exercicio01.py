@@ -1,6 +1,18 @@
+import threading 
 import random
 
-# Função principal do QuickSort
+# Função principal do QuickSort 
+'''
+def: criação de uma função
+arr: array -> estrutura de dados que armazena uma coleção de elementos do mesmo tipo
+pivot: valor a ser armazenado para uso em uma função. Nesse caso,
+o primeiro pivot é o ultimo numero a ser gerado ([-1] -> inverte)
+a ordenação dos algoritmos acontece a partir do valor do pivot.
+ex: ultimo numero gerado foi 29, pivot = 29, 40 > 29 logo vai para a direita
+21 < 29 logo vai para a esquerda.
+A palavra *args (abreviação de arguments ) é utilizada quando precisamos passar vários 
+valores para função sem saber ao certo quantos serão
+'''
 
 def quicksort(arr):
     if len(arr) <= 1:
