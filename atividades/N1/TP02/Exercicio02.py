@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+import threading 
+import time 
 
 def buscar_palavra_no_site(url_inicial, palavra, profundidade_maxima=3):
     """
@@ -17,12 +19,15 @@ def buscar_palavra_no_site(url_inicial, palavra, profundidade_maxima=3):
     # Estruturas para armazenar resultados e evitar loops
     urls_visitados = set()
     resultados = {}
+    lock = threading.Lock() 
 
     def buscar_recursivo(url_atual, profundidade_atual):
         # Verifica se atingimos a profundidade máxima ou já visitamos essa URL
         if profundidade_atual > profundidade_maxima or url_atual in urls_visitados:
             return
-        urls_visitados.add(url_atual)
+        
+        with lock:
+            urls_visitados.add(url_atual)
 
         try:
             # Faz a requisição HTTP
@@ -36,7 +41,9 @@ def buscar_palavra_no_site(url_inicial, palavra, profundidade_maxima=3):
             # Verifica se a palavra está no conteúdo da página
             conteudo = soup.get_text().lower()
             palavra_encontrada = palavra.lower() in conteudo
-            resultados[url_atual] = palavra_encontrada
+
+            with lock:
+                resultados[url_atual] = palavra_encontrada
 
             # Extrai todos os links da página
             links = soup.find_all('a', href=True)
